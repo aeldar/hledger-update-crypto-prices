@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+set -o errexit
+set -o nounset
+
 DEFAULT_LEDGER_FILE=~/.hledger.journal
 DEFAULT_CRYPTO_LIST=BTC,ADA
 
@@ -11,7 +14,7 @@ URL="https://min-api.cryptocompare.com/data/pricemulti?fsyms=${CRYPTO_LIST}&tsym
 
 JQ_NORMALIZE='to_entries | map({ key: .key, value: .value.USD }) | from_entries'
 
-DATE=`date +%Y-%m-%d`
+DATE=$(date +%Y-%m-%d)
 
 JQ_TO_HLEDGER_PRICE='to_entries | map("P " + $DATE + " " + .key + " " + (.value|tostring) + " $")'
 
@@ -21,14 +24,14 @@ echo " Trying to fetch the prices from cryptocompare.com for the following crypt
 echo "   $CRYPTO_LIST"
 echo "   ..."
 
-curl $URL --silent \
+curl "$URL" --silent \
   | jq "$JQ_NORMALIZE" \
   | jq --arg DATE "$DATE" "$JQ_TO_HLEDGER_PRICE" \
   | jq --raw-output .[] \
   | sed 's/BTC/₿/g' \
   | sed 's/ADA/₳/g' \
   | awk 'BEGIN { print "; --- Crypto prices" } { print } END { print "" }' \
-  >> $LEDGER_FILE
+  >> "$LEDGER_FILE"
 
 echo " Fetched and appended to $LEDGER_FILE."
 
