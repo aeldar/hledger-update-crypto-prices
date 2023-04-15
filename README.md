@@ -1,6 +1,6 @@
 # hledger-update-crypto-prices
 
-Update crypto prices for hledger
+Update crypto prices for [Hledger](https://hledger.org/)
 
 ## Installation
 
@@ -12,18 +12,18 @@ Update crypto prices for hledger
 
 Run:
 
-```
+```shell
 hledger update-crypto-prices
 ```
 
 You can add a comma separated list of crypto abbreviations as an argument (_BTC,ADA_ by default):
 
-```
+```shell
 hledger update-crypto-prices BTC,ADA,SOL
 ```
 
 You can specify a target currency as a second argument (_USD_ by default):
 
-```
+```shell
 hledger update-crypto-prices BTC,ADA,SOL EUR
 ```
