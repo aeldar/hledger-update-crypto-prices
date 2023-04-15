@@ -10,7 +10,15 @@ Update crypto prices for hledger
 
 ## Usage
 
+By default, the followin crypto coins will be used: **BTC** and **ADA**
+
 ```
 hledger update-crypto-prices
+```
+
+You can add a comma separated list of crypto abbreviations as an argument:
+
+```
+hledger update-crypto-prices BTC,ADA,SOL
 ```
 
