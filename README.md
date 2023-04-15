@@ -27,3 +27,7 @@ You can specify a target currency as a second argument (_USD_ by default):
 ```shell
 hledger update-crypto-prices BTC,ADA,SOL EUR
 ```
+
+## Currency abbreviations
+
+Some currencies' abbreviations are automatically converted to their symbols. Remove in the code, if you don't need it.
