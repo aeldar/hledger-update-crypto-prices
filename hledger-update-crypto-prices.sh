@@ -33,7 +33,7 @@ replaceAbbreviations () {
 }
 
 printWithHeader () {
-  awk 'BEGIN { print "; --- Crypto prices" } { print } END { print "" }' < /dev/stdin
+  awk 'BEGIN { print "\n; --- Crypto prices" } { print }' < /dev/stdin
 }
 
 RESULT=$(fetchAndTransform)
